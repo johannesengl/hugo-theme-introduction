@@ -18,20 +18,31 @@
 
             <!-- Super sweet Hero body title -->
             <div class="hero-body">
-                <div class="container has-text-centered">
+                <div class="container">
                     <!-- Title and tagline -->
-                    <h1 class="bold-title {{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in one{{ end }}">
-                        {{ .Title | markdownify }}
-                    </h1>
-                    <div class="subtitle is-3 {{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in two{{ end }}">
-                        {{ .Content }}
+                    <div class="columns">
+                    <div class="column logo is-one-third">
+                        {{ with .Resources.GetMatch "logo.png" }}
+                        {{ with .Resize "320x" }}
+                        <img class="logo img-responsive" src="{{ .Permalink }}" alt="{{ .Name }}">
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                    <div class="column">
+                        <h1 class="bold-title {{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in one{{ end }}">
+                            {{ .Title | markdownify }}
+                        </h1>
+                        <div class="subtitle is-3 {{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in two{{ end }}">
+                            {{ .Content }}
+                        </div>
+                                            <!-- Some social icons -->
+                        <div class="{{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in three{{ end }}">
+                            {{ partial "home/social.html" . }}
+                        </div>
+                        <!-- End top social icons -->
+                    </div>
                     </div>
                     <!-- End title and tagline -->
-                    <!-- Some social icons -->
-                    <div class="{{ if or (.Site.Params.fadeIn | default true) .Site.Params.fadeInIndex }}fade-in three{{ end }}">
-                        {{ partial "home/social.html" . }}
-                    </div>
-                    <!-- End top social icons -->
                 </div>
             </div> <!-- End of Hero body -->
             {{ end }}
